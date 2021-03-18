@@ -1,12 +1,15 @@
 plugins {
     val kotlinVersion = "1.3.72"
+    val springVersion = "2.3.8.RELEASE"
+    val dependencyManagerVersion = "1.0.11.RELEASE"
+
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
     kotlin("plugin.jpa") version kotlinVersion
     kotlin("kapt") version kotlinVersion
 
-    id("org.springframework.boot") version "2.2.0.RELEASE" apply false
-    id("io.spring.dependency-management") version "1.0.7.RELEASE" apply false
+    id("org.springframework.boot") version springVersion apply false
+    id("io.spring.dependency-management") version dependencyManagerVersion apply false
 
 }
 
@@ -30,9 +33,7 @@ subprojects {
         implementation(kotlin("stdlib"))
         implementation(kotlin("reflect"))
 
-        testImplementation("org.springframework.boot:spring-boot-starter-test") {
-            exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
-        }
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
     }
 
 
