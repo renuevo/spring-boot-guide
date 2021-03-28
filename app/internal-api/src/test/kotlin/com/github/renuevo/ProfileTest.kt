@@ -21,6 +21,7 @@ class ProfileTest {
         log.info("spring.profile.active :  ${environment.getProperty("spring.profiles.active")}")
         log.info("spring.profile : ${environment.getProperty("spring.profiles")}")
         log.info("activeProfile method : ${environment.activeProfiles.joinToString()}")
+        log.info("spring.profile.active[0] : ${environment.getProperty("spring.profiles.active[0]")}")
     }
 
 
