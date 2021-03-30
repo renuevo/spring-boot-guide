@@ -1,0 +1,34 @@
+spring:
+  datasource:
+    hikari:
+      jdbc-url: postgresql://localhost:5432/renuevo_db
+      username: renuevo
+      password: 123456a
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+
+---
+spring:
+  profiles: test
+  datasource:
+    hikari:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:mem:spring-guide
+      username: sa
+      password:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+
+---
+spring:
+  profiles: sandbox
+
+
+---
+spring:
+  profiles: production
