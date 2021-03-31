@@ -1,5 +1,13 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
+val jar: Jar by tasks
+val bootJar: BootJar by tasks
 val querydslVersion = "4.4.0"
 val annotationApiVersion = "1.3.2"
+
+
+bootJar.enabled = false
+jar.enabled = true
 
 
 dependencies {
