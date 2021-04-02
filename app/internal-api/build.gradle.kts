@@ -1,4 +1,6 @@
 dependencies {
+    implementation(project(":client"))
+    implementation(project(":domain"))
     implementation(project(":app-common-api"))
-    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation(project(":postgres-infrastructure"))
 }
