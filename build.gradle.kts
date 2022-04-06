@@ -1,6 +1,6 @@
 plugins {
-    val kotlinVersion = "1.3.72"
-    val springVersion = "2.3.8.RELEASE"
+    val kotlinVersion = "1.6.20"
+    val springVersion = "2.6.6"
     val dependencyManagerVersion = "1.0.11.RELEASE"
 
     kotlin("jvm") version kotlinVersion
@@ -10,8 +10,15 @@ plugins {
 
     id("org.springframework.boot") version springVersion apply false
     id("io.spring.dependency-management") version dependencyManagerVersion apply false
+    id("org.jetbrains.kotlin.plugin.allopen") version kotlinVersion apply false
+    id ("org.jetbrains.kotlin.plugin.noarg") version kotlinVersion apply false
 
 }
+
+repositories {
+    mavenCentral()
+}
+
 
 subprojects {
 
@@ -20,8 +27,9 @@ subprojects {
 
     apply(plugin = "kotlin")
     apply(plugin = "kotlin-kapt")
-    apply(plugin = "kotlin-jpa")
     apply(plugin = "kotlin-spring")
+    apply(plugin = "kotlin-allopen")
+    apply(plugin = "kotlin-noarg")
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
 
@@ -42,6 +50,7 @@ subprojects {
         useJUnitPlatform()
         systemProperty("spring.profiles.active", "test")
     }
+
 
     tasks {
         compileKotlin {

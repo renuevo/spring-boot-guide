@@ -7,11 +7,11 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.core.env.Environment
 import org.springframework.test.context.ActiveProfiles
 
+/*
 @SpringBootTest
-@ActiveProfiles("test")
 class ProfileTest {
 
-    private val log = LoggerFactory.getLogger(ProfileTest::class.java)
+    private val log = LoggerFactory.getLogger(this::class.java)
 
     @Autowired
     private lateinit var environment : Environment
@@ -26,3 +26,4 @@ class ProfileTest {
 
 
 }
+ */
