@@ -1,12 +1,6 @@
-import org.springframework.boot.gradle.tasks.bundling.BootJar
-
-val jar: Jar by tasks
-val bootJar: BootJar by tasks
-
-bootJar.enabled = false
-jar.enabled = true
-
-val querydslVersion = "4.4.0"
+plugins{
+    kotlin("plugin.jpa") version  Versions.kotlin
+}
 
 allOpen {
     annotation("javax.persistence.Entity")
@@ -14,13 +8,17 @@ allOpen {
     annotation("javax.persistence.Embeddable")
 }
 
-dependencies {
-    runtimeOnly("com.h2database:h2")
-    implementation("org.postgresql:postgresql")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-    implementation("com.querydsl:querydsl-jpa:$querydslVersion")
-    kapt("com.querydsl:querydsl-apt:$querydslVersion:jpa")
-    testImplementation("com.querydsl:querydsl-jpa:$querydslVersion")
-    testAnnotationProcessor("com.querydsl:querydsl-apt:$querydslVersion:jpa")
+dependencies {
+
+    implementation(project(Projects.domain))
+
+    runtimeOnly(Dependencies.h2)
+    implementation(Dependencies.postgres)
+    implementation(Dependencies.springBootJpa)
+
+    implementation(Dependencies.queryDslJpa)
+    kapt(Dependencies.queryDslApt)
+    testImplementation(Dependencies.queryDslJpa)
+    testAnnotationProcessor(Dependencies.queryDslApt)
 }

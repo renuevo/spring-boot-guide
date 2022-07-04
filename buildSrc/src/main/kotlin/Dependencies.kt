@@ -1,3 +1,5 @@
+import java.lang.Runtime.Version
+
 object Dependencies {
 
   val springBootWeb by lazy { "org.springframework.boot:spring-boot-starter-web" }
@@ -8,11 +10,19 @@ object Dependencies {
 
   val jacksonModule by lazy { "com.fasterxml.jackson.module:jackson-module-kotlin" }
 
+  val h2 by lazy {"com.h2database:h2"}
+  val postgres by lazy {"org.postgresql:postgresql"}
+  val queryDslJpa by lazy {"com.querydsl:querydsl-jpa:${Versions.querydslVersion}"}
+  val queryDslApt by lazy {"com.querydsl:querydsl-apt:${Versions.querydslVersion}:jpa"}
+
 }
 
 
 object TestDependencies {
 
+  val springBootTest by lazy { "org.springframework.boot:spring-boot-starter-test" }
+  val kotestSpring by lazy { "" }
+  val mockk by lazy { "" }
 
 
 }

@@ -18,7 +18,6 @@ configure<DependencyManagementExtension> {
 }
 
 dependencies {
-    implementation(project(":common"))
 
     implementation("io.github.resilience4j:resilience4j-micrometer:$resilience4jVersion")
     implementation("io.github.resilience4j:resilience4j-spring-boot2:$resilience4jVersion")

@@ -1,6 +1,5 @@
 rootProject.name = "spring-boot-guide"
 
-include("common")
 include("domain")
 include("client")
 

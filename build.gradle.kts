@@ -1,48 +1,58 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 plugins {
-    val kotlinVersion = "1.6.20"
-    val springVersion = "2.6.6"
-    val dependencyManagerVersion = "1.0.11.RELEASE"
-
-    kotlin("jvm") version kotlinVersion
-    kotlin("plugin.spring") version kotlinVersion
-    kotlin("plugin.jpa") version kotlinVersion
-    kotlin("kapt") version kotlinVersion
-
-    id("org.springframework.boot") version springVersion apply false
-    id("io.spring.dependency-management") version dependencyManagerVersion apply false
-    id("org.jetbrains.kotlin.plugin.allopen") version kotlinVersion apply false
-    id ("org.jetbrains.kotlin.plugin.noarg") version kotlinVersion apply false
-
+    id("org.springframework.boot") version Versions.springBoot apply false
+    id("io.spring.dependency-management") version Versions.springDependencyManagement apply false
+    kotlin("jvm") version Versions.kotlin
+    kotlin("plugin.spring") version Versions.kotlin
 }
 
-repositories {
-    mavenCentral()
+
+
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+
+    group = "com.github"
 }
+
+configurations {
+    compileOnly {
+        extendsFrom(configurations.annotationProcessor.get())
+    }
+}
+
 
 
 subprojects {
-
-    group = "com.github.renuevo"
-    version = "1.0-SNAPSHOT"
 
     apply(plugin = "kotlin")
     apply(plugin = "kotlin-kapt")
     apply(plugin = "kotlin-spring")
     apply(plugin = "kotlin-allopen")
-    apply(plugin = "kotlin-noarg")
     apply(plugin = "org.springframework.boot")
     apply(plugin = "io.spring.dependency-management")
 
-    repositories {
-        mavenCentral()
-    }
+    java.sourceCompatibility = JavaVersion.VERSION_11
+    java.targetCompatibility = JavaVersion.VERSION_11
 
     dependencies {
-        implementation(kotlin("stdlib"))
-        implementation(kotlin("reflect"))
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+        implementation(Dependencies.jacksonModule)
+        implementation(Dependencies.kotlinReflect)
+        implementation(Dependencies.kotlinStdlibJdk8)
+        testImplementation(TestDependencies.springBootTest){
+            exclude(group = "junit")
+            exclude(group = "mockito-core")
+            exclude(group = "hamcrest")
+        }
+    }
 
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "11"
+        }
     }
 
 
@@ -51,14 +61,12 @@ subprojects {
         systemProperty("spring.profiles.active", "test")
     }
 
+    tasks.named<Jar>("jar"){
+        enabled = true
+    }
 
-    tasks {
-        compileKotlin {
-            kotlinOptions.jvmTarget = "11"
-        }
-        compileTestKotlin {
-            kotlinOptions.jvmTarget = "11"
-        }
+    tasks.named<BootJar>("bootJar"){
+        enabled = false
     }
 
 }
