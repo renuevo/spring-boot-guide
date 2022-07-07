@@ -10,11 +10,11 @@ plugins {
 
 
 allprojects {
+    group = "com.github"
+
     repositories {
         mavenCentral()
     }
-
-    group = "com.github"
 }
 
 configurations {
@@ -37,15 +37,26 @@ subprojects {
     java.sourceCompatibility = JavaVersion.VERSION_11
     java.targetCompatibility = JavaVersion.VERSION_11
 
+
     dependencies {
         implementation(Dependencies.jacksonModule)
         implementation(Dependencies.kotlinReflect)
         implementation(Dependencies.kotlinStdlibJdk8)
-        testImplementation(TestDependencies.springBootTest){
+        implementation(Dependencies.kotlinCoroutinesCore)
+
+
+        //test
+        testImplementation(TestDependencies.kotlinCoroutinesTest)
+        testImplementation(TestDependencies.springBootTest) {
             exclude(group = "junit")
             exclude(group = "mockito-core")
             exclude(group = "hamcrest")
         }
+        testImplementation(TestDependencies.kotestJunit)
+        testImplementation(TestDependencies.kotestAssertions)
+        testImplementation(TestDependencies.kotestProperty)
+        testImplementation(TestDependencies.kotestSpring)
+        testImplementation(TestDependencies.mockk)
     }
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
@@ -61,11 +72,11 @@ subprojects {
         systemProperty("spring.profiles.active", "test")
     }
 
-    tasks.named<Jar>("jar"){
+    tasks.named<Jar>("jar") {
         enabled = true
     }
 
-    tasks.named<BootJar>("bootJar"){
+    tasks.named<BootJar>("bootJar") {
         enabled = false
     }
 
