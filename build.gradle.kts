@@ -3,11 +3,10 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 plugins {
     id("org.springframework.boot") version Versions.springBoot apply false
     id("io.spring.dependency-management") version Versions.springDependencyManagement apply false
+    id("org.jlleitschuh.gradle.ktlint") version Versions.ktlint
     kotlin("jvm") version Versions.kotlin
     kotlin("plugin.spring") version Versions.kotlin
 }
-
-
 
 allprojects {
     group = "com.github"
@@ -23,8 +22,6 @@ configurations {
     }
 }
 
-
-
 subprojects {
 
     apply(plugin = "kotlin")
@@ -37,13 +34,11 @@ subprojects {
     java.sourceCompatibility = JavaVersion.VERSION_11
     java.targetCompatibility = JavaVersion.VERSION_11
 
-
     dependencies {
         implementation(Dependencies.jacksonModule)
         implementation(Dependencies.kotlinReflect)
         implementation(Dependencies.kotlinStdlibJdk8)
         implementation(Dependencies.kotlinCoroutinesCore)
-
 
         //test
         testImplementation(TestDependencies.kotlinCoroutinesTest)
@@ -66,7 +61,6 @@ subprojects {
         }
     }
 
-
     tasks.withType<Test> {
         useJUnitPlatform()
         systemProperty("spring.profiles.active", "test")
@@ -79,5 +73,4 @@ subprojects {
     tasks.named<BootJar>("bootJar") {
         enabled = false
     }
-
 }
