@@ -2,11 +2,18 @@ object Dependencies {
 
     val springBootWeb by lazy { "org.springframework.boot:spring-boot-starter-web" }
     val springBootJpa by lazy { "org.springframework.boot:spring-boot-starter-data-jpa" }
+    val springBootAop by lazy { "org.springframework.boot:spring-boot-starter-aop" }
+    val springCloud by lazy { "org.springframework.cloud:spring-cloud-dependencies:${Versions.springCloudVersion}" }
+
 
     val kotlinReflect by lazy { "org.jetbrains.kotlin:kotlin-reflect" }
     val kotlinStdlibJdk8 by lazy { "org.jetbrains.kotlin:kotlin-stdlib-jdk8" }
     val kotlinCoroutinesCore by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:${Versions.coroutines}" }
 
+
+    val resilience4jSpringBoot by lazy { "io.github.resilience4j:resilience4j-micrometer:${Versions.resilience4jVersion}" }
+    val resilience4jMicrometer by lazy { "io.github.resilience4j:resilience4j-spring-boot2:${Versions.resilience4jVersion}" }
+    val springCloudOpenFeign by lazy { "org.springframework.cloud:spring-cloud-starter-openfeign:${Versions.openfeignVersion}" }
     val jacksonModule by lazy { "com.fasterxml.jackson.module:jackson-module-kotlin" }
 
     val h2 by lazy { "com.h2database:h2" }
